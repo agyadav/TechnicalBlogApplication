@@ -7,24 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import technicalblog.model.Post;
 import technicalblog.service.PostService;
 
+import javax.jws.WebParam;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Controller
-public class HomeController {
-
-    public HomeController() {
-        System.out.println("*** HomeController ***");
-    }
-
+public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/")
-    public String getAllPosts(Model model){
-        ArrayList<Post> posts = new ArrayList();
-        posts = postService.getAllPosts();
+    @RequestMapping("posts")
+    public String getUserPosts(Model model){
+        ArrayList<Post> posts = postService.getOnePost();
         model.addAttribute("posts", posts);
-        return "index";
+        return "posts";
     }
 }
